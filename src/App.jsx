@@ -33,7 +33,7 @@ const customTheme = {
 		Form: {
 			itemMarginInlineEnd: 0,
 			itemMarginBottom: 0,
-		}
+		},
 	}
 }
 

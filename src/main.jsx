@@ -1,19 +1,24 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import { PATHS } from '@/constants/paths.js'
 
 import './global.css'
 
 import App from '@/App.jsx'
 import HomePage from '@/pages/HomePage.jsx'
-import AboutPage from '@/pages/AboutPage.jsx'
+import CalendarPage from '@/pages/CalendarPage.jsx'
+
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+dayjs.locale('ru')
 
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: PATHS.HOME,
 		element: <App />,
 		children: [
-			{ path: '/', element: <HomePage /> },
-			{ path: '/about', element: <AboutPage /> },
+			{ path: PATHS.HOME, element: <HomePage /> },
+			{ path: PATHS.CALENDAR, element: <CalendarPage /> },
 		]
 	}
 ])

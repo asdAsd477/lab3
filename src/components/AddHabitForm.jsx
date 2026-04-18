@@ -2,7 +2,7 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 import { Button, Flex, Form, Input } from 'antd'
 import { useRef } from 'react'
 
-export default function HabitForm({ setHabits }) {
+export default function AddHabitForm({ setHabits }) {
 	const inputRef = useRef(null)
 	const [form] = Form.useForm()
 

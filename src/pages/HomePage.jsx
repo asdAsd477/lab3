@@ -1,7 +1,7 @@
 import { useLocalStorage } from '@/hooks/useLocalStorage.js'
 
 import Container from '@/layout/Container.jsx'
-import HabitForm from '@/components/HabitForm.jsx'
+import AddHabitForm from '@/components/AddHabitForm.jsx'
 import HabitList from '@/components/HabitList.jsx'
 
 import { Typography } from 'antd'
@@ -15,8 +15,8 @@ export default function HomePage() {
 
 	return (
 		<Container>
-			<Title level={2}>Добавить привычку</Title>
-			<HabitForm setHabits={setHabits} />
+			<Title level={2}>🥬 Добавить привычку</Title>
+			<AddHabitForm setHabits={setHabits} />
 			<HabitList setHabits={setHabits} habits={habits} />
 		</Container>
 	)
