@@ -13,7 +13,7 @@ export default function CalendarPage() {
 	const [selectedDate, setSelectedDate] = useState(dayjs())
 
 	return (
-		<Container width={1200}>
+		<Container width={1000}>
 			<Title level={2}>📅 Календарь привычек</Title>
 
 			<Calendar

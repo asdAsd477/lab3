@@ -4,3 +4,7 @@
 	padding: 0;
 	font: inherit;
 }
+
+.ant-picker-calendar-header [role="radiogroup"] {
+	display: none;
+}

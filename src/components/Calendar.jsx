@@ -1,4 +1,5 @@
-import { Calendar as AntCalendar, Typography } from 'antd'
+import { Calendar as AntCalendar, Flex, Typography } from 'antd'
+const { Text } = Typography
 
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import dayjs from 'dayjs'
@@ -11,37 +12,46 @@ export default function Calendar({
 }) {
 	const today = dayjs().startOf('day')
 
-	const fullCellRender = (date) => {
-		const isToday = date.isSame(today, 'day');
-		const isSelected = date.isSame(selectedDate, 'day');
-		const isCurrentMonth = date.isSame(selectedDate, 'month');
-		const isFuture = date.isAfter(today, 'day');
+	const fullCellRender = date => {
+		const isToday = date.isSame(today, 'day')
+		const isSelected = date.isSame(selectedDate, 'day')
+		const isCurrentMonth = date.isSame(selectedDate, 'month')
+		const isFuture = date.isAfter(today, 'day')
 
-		const cellStyle = {
-			height: '100px',
-			padding: '10px',
-			border: isToday ? '2px solid #52c41a' : '1px solid #303030',
-			borderRadius: '8px',
-			backgroundColor: isSelected ? 'rgba(82, 196, 26, 0.15)' : (isCurrentMonth ? '#1a1a1a' : 'transparent'),
-			opacity: isFuture ? 0.4 : 1,
+		const style = {
+			border: '2px solid #2a2a2a',
+			padding: 14,
+			borderRadius: 5,
+
+			background: isFuture ? '#444' : '#373',
 			cursor: isFuture ? 'not-allowed' : 'pointer',
-			transition: 'all 0.3s'
-		};
+
+			opacity: isCurrentMonth ? 1 : .25,
+			boxShadow: `inset 0 0 0 ${isToday ? 3 : 0}px #fff6`,
+		}
+
+		// 0 = nothing done | 1 = something done | 2 = everything done
+		const status = Math.random() * 3 | 0
+		if(!isFuture && status !== 2) style.background = ['#733', '#773'][status]
+
+		const onClick = e => {
+			e.stopPropagation()
+			if(!isFuture) setIsModalOpen(true)
+		}
 
 		return (
-			<div 
-				style={cellStyle} 
-				onClick={() => !isFuture && setIsModalOpen(true)}
-				// onClick={(e) => e.stopPropagation()}
-			>
-				<Typography.Text strong={isToday}>{date.date()}</Typography.Text>
-				<div style={{ marginTop: 10, fontSize: '12px', color: '#52c41a' }}>
-					{!isFuture && "3 из 5"}
-				</div>
-			</div>
-		);
-	};
+			<Flex
+				style={style} 
+				onClick={onClick}
 
+				vertical
+				gap="small"
+				justify="right"
+			>
+				{date.date()}
+			</Flex>
+		)
+	}
 
 	return (
 		<AntCalendar
@@ -52,8 +62,8 @@ export default function Calendar({
 			}}
 
 			fullCellRender={fullCellRender}
-			locale={locale}
 			onSelect={setSelectedDate}
+			locale={locale}
 		/>
 	)
 }
