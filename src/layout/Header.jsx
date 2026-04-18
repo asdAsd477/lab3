@@ -27,7 +27,7 @@ export default function Header() {
 						let style = {}
 
 						if(location.pathname === item.key) style = {
-							borderBottom: '1px solid',
+							borderBottom: '2px solid',
 							pointerEvents: 'none',
 						}
 
