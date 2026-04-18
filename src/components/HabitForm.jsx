@@ -7,7 +7,13 @@ export default function HabitForm({ setHabits }) {
 	const [form] = Form.useForm()
 
 	const onFinish = fields => {
-		setHabits(habits => [...habits, fields.habit])
+		const newHabit = {
+			id: crypto.randomUUID(),
+			title: fields.habit,
+			createdAt: +new Date,
+		}
+		setHabits(habits => [...habits, newHabit])
+
 		form.resetFields()
 		setTimeout(() => inputRef.current.focus())
 	}
