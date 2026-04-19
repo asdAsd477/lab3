@@ -1,21 +1,21 @@
-import { Calendar as AntCalendar, Flex, Typography } from 'antd'
-const { Text } = Typography
+import { useCalendarContext } from '@/components/CalendarProvider.jsx'
+import { useHabitStore } from '@/hooks/useHabitStore.js'
+import { getDayColor } from '@/utils/habitUtils.js'
+import { Calendar as AntCalendar, Flex } from 'antd'
 
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import dayjs from 'dayjs'
 
-export default function Calendar({
-	isModalOpen,
-	setIsModalOpen,
-	selectedDate,
-	setSelectedDate,
-}) {
+export default function HabitsCalendar() {
+	const habits = useHabitStore(state => state.habits)
+	const history = useHabitStore(state => state.history)
+
+	const { setIsModalOpen, setSelectedDate } = useCalendarContext()
 	const today = dayjs().startOf('day')
 
 	const fullCellRender = date => {
 		const isToday = date.isSame(today, 'day')
-		const isSelected = date.isSame(selectedDate, 'day')
-		const isCurrentMonth = date.isSame(selectedDate, 'month')
+		const isCurrentMonth = date.isSame(dayjs(), 'month')
 		const isFuture = date.isAfter(today, 'day')
 
 		const style = {
@@ -23,26 +23,25 @@ export default function Calendar({
 			padding: 14,
 			borderRadius: 5,
 
-			background: isFuture ? '#444' : '#373',
+			background: isFuture ? '#444' : getDayColor(date, habits, history),
 			cursor: isFuture ? 'not-allowed' : 'pointer',
 
 			opacity: isCurrentMonth ? 1 : .25,
 			boxShadow: `inset 0 0 0 ${isToday ? 3 : 0}px #fff6`,
 		}
 
-		// 0 = nothing done | 1 = something done | 2 = everything done
-		const status = Math.random() * 3 | 0
-		if(!isFuture && status !== 2) style.background = ['#733', '#773'][status]
-
 		const onClick = e => {
 			e.stopPropagation()
-			if(!isFuture) setIsModalOpen(true)
+			if(isFuture) return
+
+			setSelectedDate(date)
+			setIsModalOpen(true)
 		}
 
 		return (
 			<Flex
 				style={style} 
-				onClick={onClick}
+				onClick={e => onClick(e)}
 
 				vertical
 				gap="small"

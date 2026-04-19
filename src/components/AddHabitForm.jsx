@@ -1,19 +1,16 @@
+import { useHabitStore } from '@/hooks/useHabitStore.js'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { Button, Flex, Form, Input } from 'antd'
 import { useRef } from 'react'
 
-export default function AddHabitForm({ setHabits }) {
+export default function AddHabitForm() {
+	const addHabit = useHabitStore(store => store.addHabit)
+
 	const inputRef = useRef(null)
 	const [form] = Form.useForm()
 
 	const onFinish = fields => {
-		const newHabit = {
-			id: crypto.randomUUID(),
-			title: fields.habit,
-			createdAt: +new Date,
-		}
-		setHabits(habits => [...habits, newHabit])
-
+		addHabit(fields.habit)
 		form.resetFields()
 		setTimeout(() => inputRef.current.focus())
 	}

@@ -1,13 +1,13 @@
+import { useHabitStore } from '@/hooks/useHabitStore.js'
 import { formatTimestamp } from '@/utils/formatTimestamp.js'
 import { DeleteOutlined } from '@ant-design/icons'
 import { Button, Empty, List, Tooltip, Typography } from 'antd'
 
 const { Text } = Typography
 
-export default function HabitList({ habits, setHabits }) {
-	const deleteHabit = id => {
-		setHabits(habits => habits.filter(habit => habit.id !== id))
-	}
+export default function HabitsList() {
+	const habits = useHabitStore(store => store.habits)
+	const removeHabit = useHabitStore(store => store.removeHabit)
 
 	return (
 		<List
@@ -15,15 +15,20 @@ export default function HabitList({ habits, setHabits }) {
 
 			dataSource={habits}
 			renderItem={(habit, i) => (
-				<List.Item actions={[
-					<Button
-						type="primary"
-						danger
+				<List.Item
+					style={{
+						opacity: habit.deletedAt ? .3 : 1, // Для дебага
+					}}
+					actions={[
+						<Button
+							type="primary"
+							danger
 
-						icon={<DeleteOutlined />}
-						onClick={() => deleteHabit(habit.id)}
-					/>
-				]}>
+							icon={<DeleteOutlined />}
+							onClick={() => removeHabit(habit.id)}
+						/>
+					]}
+				>
 					<Tooltip placement="left" title={`Добавлена ${formatTimestamp(habit.createdAt)}`}>
 						<Text>{i+1}. {habit.title}</Text>
 					</Tooltip>
