@@ -18,7 +18,7 @@ export default function Header() {
 	return (
 		<AntHeader>
 			<Flex justify="space-between" align="center">
-				<Link href="/" style={{ lineHeight: 1 }}>
+				<Link href="/" style={{ lineHeight: 1 }} viewTransition>
 					<Text style={{fontSize: 24}}>🌱 habits.</Text>
 				</Link>
 
@@ -31,7 +31,7 @@ export default function Header() {
 							pointerEvents: 'none',
 						}
 
-						return <Link to={item.key} style={style}>
+						return <Link to={item.key} style={style} viewTransition>
 							{item.label}
 						</Link>
 					})}

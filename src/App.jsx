@@ -42,7 +42,7 @@ export default function App() {
 		<ConfigProvider theme={customTheme}>
 			<Layout style={{ minHeight: '100vh' }}>
 				<Header />
-				<Content>
+				<Content style={{ viewTransitionName: 'page-content' }}>
 					<Outlet />
 				</Content>
 			</Layout>

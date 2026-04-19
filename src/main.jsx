@@ -7,6 +7,7 @@ import './global.css'
 import App from '@/App.jsx'
 import HomePage from '@/pages/HomePage.jsx'
 import CalendarPage from '@/pages/CalendarPage.jsx'
+import StatsPage from '@/pages/StatsPage.jsx'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
 		children: [
 			{ path: PATHS.HOME, element: <HomePage /> },
 			{ path: PATHS.CALENDAR, element: <CalendarPage /> },
+			{ path: PATHS.STATS, element: <StatsPage /> },
 		]
 	}
 ])
