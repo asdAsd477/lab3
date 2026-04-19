@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createHashRouter, RouterProvider } from 'react-router'
 import { PATHS } from '@/constants/paths.js'
 
 import './global.css'
@@ -13,7 +13,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
 dayjs.locale('ru')
 
-const router = createBrowserRouter([
+const router = createHashRouter([
 	{
 		path: PATHS.HOME,
 		element: <App />,
@@ -23,7 +23,9 @@ const router = createBrowserRouter([
 			{ path: PATHS.STATS, element: <StatsPage /> },
 		]
 	}
-])
+], {
+	// basename: '/lab3',
+})
 
 createRoot(document.getElementById('root')).render(
 	<RouterProvider router={router} />
