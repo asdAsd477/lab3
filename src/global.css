@@ -17,19 +17,19 @@
 
 /* Анимации переходов по страницам */
 @keyframes slide-out {
-	from { transform: translateX(0); opacity: 1; }
-	to { transform: translateX(-30px); opacity: 0; }
+	from { transform: translatey(0); opacity: 1; }
+	to { transform: translatey(-30px); opacity: 0; }
 }
 
 @keyframes slide-in {
-	from { transform: translateX(30px); opacity: 0; }
-	to { transform: translateX(0); opacity: 1; }
+	from { transform: translatey(30px); opacity: 0; }
+	to { transform: translatey(0); opacity: 1; }
 }
 
 ::view-transition-old(page-content) {
-	animation: .2s ease-out both slide-out;
+	animation: .2s both slide-out;
 }
 
 ::view-transition-new(page-content) {
-	animation: .2s ease-out both slide-in;
+	animation: .2s both slide-in;
 }

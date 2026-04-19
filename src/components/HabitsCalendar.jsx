@@ -58,6 +58,7 @@ export default function HabitsCalendar() {
 			style={{
 				borderRadius: 20,
 				padding: '20px 30px',
+				userSelect: 'none',
 			}}
 
 			fullCellRender={fullCellRender}

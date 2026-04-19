@@ -16,7 +16,7 @@ export default function Header() {
 	]
 
 	return (
-		<AntHeader>
+		<AntHeader style={{ userSelect: 'none' }}>
 			<Flex justify="space-between" align="center">
 				<Link href="/" style={{ lineHeight: 1 }} viewTransition>
 					<Text style={{fontSize: 24}}>🌱 habits.</Text>
