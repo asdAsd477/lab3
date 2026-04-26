@@ -1,0 +1,20 @@
+name: CI Tests # Название процесса
+on: [push]     # Запускать при каждом пуше
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest # Используем Linux
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Скачиваем код репозитория
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Указываем версию Node.js
+
+      - name: Install dependencies
+        run: npm install # Устанавливаем пакеты
+
+      - name: Run unit and integration tests
+        run: npm run test # Запускаем Vitest
